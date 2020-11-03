@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from "react";
+import "./styles.css";
 
-import './styles.css';
-
-const App = () => {
-    const [ item, setItem ] = useState(1);
+export default function App() {
+    const [item, setItem] = useState(1);
     const incrementItem = () => setItem(item + 1);
     const decrementItem = () => setItem(item - 1);
+
     return (
         <div className="App">
             <h1>Hello {item}</h1>
@@ -21,18 +20,18 @@ class AppUgly extends React.Component {
     state = {
         item: 1
     };
-    incrementItem = () => {
+    incrementItem() {
         this.setState((state) => {
             return {
                 item: state.item + 1
-            }
+            };
         });
     }
-    decrementItem = () => {
+    decrementItem() {
         this.setState((state) => {
             return {
                 item: state.item - 1
-            }
+            };
         });
     }
     render() {
@@ -44,9 +43,6 @@ class AppUgly extends React.Component {
                 <button onClick={this.incrementItem}>Increment</button>
                 <button onClick={this.decrementItem}>Decrement</button>
             </div>
-        )
+        );
     }
 }
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
