@@ -6,16 +6,30 @@ const useFullscreen = (callback) => {
 
     const triggerFull = () => {
         if (element.current) {
-            element.current.requestFullscreen();
-
-            if (callback && typeof callback === "function") {
-                callback(true);
+            if (element.current.requestFullscreen) {
+                element.current.requestFullscreen();
+            } else if (element.current.mozRequestFullscreen) {
+                element.current.mozRequestFullscreen();
+            } else if (element.current.wekitRequestFullscreen) {
+                element.current.wekitRequestFullscreen();
+            } else if (element.current.msRequestFullscreen) {
+                element.current.msRequestFullscreen();
             }
+
+            callback(true);
         }
     };
 
     const exitFull = () => {
-        document.exitFullscreen();
+        if (document.requestFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozRequestFullscreen) {
+            element.current.mozExitFullscreen();
+        } else if (document.wekitRequestFullscreen) {
+            document.wekitExitFullscreen();
+        } else if (document.msRequestFullscreen) {
+            document.msExitFullscreen();
+        }
 
         if (callback && typeof callback === "function") {
             callback(false);
